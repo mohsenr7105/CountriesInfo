@@ -1,12 +1,12 @@
 package ir.mohsenr7105.countriesinfo;
 
 import android.app.ProgressDialog;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,12 +14,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                URL url = new URL("https://restcountries.eu/rest/v2/all");
+                URL url = new URL("https://restcountries.eu/rest/v2/all?fields=name;translations;alpha2Code");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -92,10 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray countries = (JSONArray) new JSONTokener(response).nextValue();
                 for (int i = 0; i < countries.length(); i++) {
                     JSONObject country = countries.getJSONObject(i);
-                    String countryName = country.getJSONObject("translations")
+                    String countryName = country.getString("name");
+                    String countryFarsiName = country.getJSONObject("translations")
                             .getString("fa");
                     String alpha2Code = country.getString("alpha2Code");
-                    listCountries.add(new Country(countryName, alpha2Code));
+                    listCountries.add(new Country(countryName, countryFarsiName, alpha2Code));
                 }
 
             } catch (JSONException ex) {
@@ -107,6 +105,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
