@@ -20,6 +20,7 @@ public class CountriesAdapter extends ArrayAdapter {
     private static class ViewHolder{
         ImageView imageCountryFlag;
         TextView textCountryName;
+        TextView textCountryFarsiName;
     }
 
     CountriesAdapter(@NonNull Context context, @NonNull List countries) {
@@ -39,6 +40,7 @@ public class CountriesAdapter extends ArrayAdapter {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_countries, parent, false);
 
             viewHolder.textCountryName = convertView.findViewById(R.id.text_country_name);
+            viewHolder.textCountryFarsiName = convertView.findViewById(R.id.text_country_farsi_name);
             viewHolder.imageCountryFlag = convertView.findViewById(R.id.image_country_flag);
 
             convertView.setTag(viewHolder);
@@ -47,6 +49,7 @@ public class CountriesAdapter extends ArrayAdapter {
         }
 
         viewHolder.textCountryName.setText(country.getName());
+        viewHolder.textCountryFarsiName.setText(country.getFarsiName());
         String resName = "ic_list_" + country.getAlpha2Code().toLowerCase();
         Log.i(LOG, resName);
         int resId = getContext().getResources().getIdentifier(
