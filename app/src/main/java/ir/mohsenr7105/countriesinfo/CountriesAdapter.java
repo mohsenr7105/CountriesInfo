@@ -9,13 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class CountriesAdapter extends ArrayAdapter {
+public class CountriesAdapter extends ArrayAdapter implements Filterable{
     private static final String LOG = CountriesAdapter.class.getSimpleName();
+
+    private List mCountriesList;
+    private List mCountriesFixedList;
 
     private static class ViewHolder{
         ImageView imageCountryFlag;
@@ -24,7 +31,25 @@ public class CountriesAdapter extends ArrayAdapter {
     }
 
     CountriesAdapter(@NonNull Context context, @NonNull List countries) {
-        super(context, 0, countries);
+        super(context, 0);
+        mCountriesList = countries;
+        mCountriesFixedList = countries;
+    }
+
+    @Override
+    public int getCount() {
+        return mCountriesList.size();
+    }
+
+    @Nullable
+    @Override
+    public Object getItem(int position) {
+        return mCountriesList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @NonNull
@@ -59,5 +84,45 @@ public class CountriesAdapter extends ArrayAdapter {
         viewHolder.imageCountryFlag.setImageResource(resId);
 
         return convertView;
+    }
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                // int results variable
+                FilterResults results = new FilterResults();
+
+                // validation
+                if (charSequence != null && charSequence.length() > 0) {
+                    charSequence = charSequence.toString().toLowerCase();
+                    ArrayList<Country> filteredCountries = new ArrayList<>();
+
+                    for (Country country: (ArrayList<Country>) mCountriesFixedList){
+                        if (country.getName().toLowerCase().contains(charSequence)
+                                || country.getFarsiName().contains(charSequence)
+                                || country.getAlpha2Code().toLowerCase().contains(charSequence)){
+                            filteredCountries.add(country);
+                        }
+                    }
+                    results.count = filteredCountries.size();
+                    results.values = filteredCountries;
+                } else {
+                    results.count = mCountriesFixedList.size();
+                    results.values = mCountriesFixedList;
+                }
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mCountriesList = (ArrayList<Country>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+
+        return filter;
     }
 }

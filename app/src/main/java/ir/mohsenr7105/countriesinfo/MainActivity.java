@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,20 +23,36 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     final static String LOG = MainActivity.class.getSimpleName();
-    List<Country> listCountries = new ArrayList<>();
 
-    CountriesAdapter adapterCountries;
+    List<Country> countriesList = new ArrayList<>();
 
-    ListView listViewCountries;
+    CountriesAdapter countriesAdapter;
+
+    ListView listCountries;
+    SearchView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listViewCountries = findViewById(R.id.list_countries);
-        adapterCountries = new CountriesAdapter(this, listCountries);
-        listViewCountries.setAdapter(adapterCountries);
+        search = findViewById(R.id.search_countries_list);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                countriesAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        listCountries = findViewById(R.id.list_countries);
+        countriesAdapter = new CountriesAdapter(this, countriesList);
+        listCountries.setAdapter(countriesAdapter);
 
         new RetrieveCountriesTask().execute();
     }
@@ -93,15 +109,15 @@ public class MainActivity extends AppCompatActivity {
                     String countryFarsiName = country.getJSONObject("translations")
                             .getString("fa");
                     String alpha2Code = country.getString("alpha2Code");
-                    listCountries.add(new Country(countryName, countryFarsiName, alpha2Code));
+                    countriesList.add(new Country(countryName, countryFarsiName, alpha2Code));
                 }
 
             } catch (JSONException ex) {
                 ex.printStackTrace();
             } finally {
                 progressDialog.dismiss();
-                Log.d(LOG, listCountries.toString());
-                adapterCountries.notifyDataSetChanged();
+                Log.d(LOG, countriesList.toString());
+                countriesAdapter.notifyDataSetChanged();
             }
         }
     }
