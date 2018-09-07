@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        enableHttpResponseCache();
+
         search = findViewById(R.id.search_countries_list);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -55,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
         listCountries.setAdapter(countriesAdapter);
 
         new RetrieveCountriesTask().execute();
+    }
+
+    private void enableHttpResponseCache() {
+        try {
+            long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
+            File httpCacheDir = new File(getCacheDir(), "http");
+            Class.forName("android.net.http.HttpResponseCache")
+                    .getMethod("install", File.class, long.class)
+                    .invoke(null, httpCacheDir, httpCacheSize);
+        } catch (Exception httpResponseCacheNotAvailable) {
+            Log.d(LOG, "HTTP response cache is unavailable.");
+        }
     }
 
     class RetrieveCountriesTask extends AsyncTask<Void, Void, String> {
