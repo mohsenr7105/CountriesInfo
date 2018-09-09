@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Countries Info</string>
+    <string name="html_country_more_info">
+        <![CDATA[
+        <b>Name: </b>%1$s<br>
+        <b>Native name: </b>%2$s<br>
+        <b>Farsi name: </b>%3$s<br>
+        <b>Codes: </b>%4$s, %5$s<br>
+        <b>Capital: </b>%6$s<br>
+        <b>Population: </b>%7$d<br>
+        <b>Area: </b>%8$d<br>
+        ]]>
+    </string>
 </resources>
