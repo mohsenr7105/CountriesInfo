@@ -6,8 +6,8 @@ android {
         applicationId "ir.mohsenr7105.countriesinfo"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 1000000
-        versionName "1.0.0"
+        versionCode 1010000
+        versionName "1.01.0-SNAPSHOT"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
