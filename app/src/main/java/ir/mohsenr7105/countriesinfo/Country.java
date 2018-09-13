@@ -12,7 +12,7 @@ public class Country {
 
     }
 
-    Country(String name, String farsiName, String alpha2Code){
+    public Country(String name, String farsiName, String alpha2Code){
         this.name = name;
         this.farsiName = farsiName;
         this.alpha2Code = alpha2Code;

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import ir.mohsenr7105.countriesinfo.task.RetrieveCounteiesTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -69,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new RetrieveCountriesTask().execute();
+        new RetrieveCounteiesTask(MainActivity.this,
+                new RetrieveCounteiesTask.OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(List<Country> countries) {
+                        countriesList.addAll(countries);
+                        countriesAdapter.notifyDataSetChanged();
+                    }
+                }).execute();
     }
 
     public void showMoreInfoAlert(Country country){
@@ -94,70 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     .invoke(null, httpCacheDir, httpCacheSize);
         } catch (Exception httpResponseCacheNotAvailable) {
             Log.d(LOG, "HTTP response cache is unavailable.");
-        }
-    }
-
-    class RetrieveCountriesTask extends AsyncTask<Void, Void, String> {
-        private ProgressDialog progressDialog;
-
-        RetrieveCountriesTask() {
-            progressDialog = new ProgressDialog(MainActivity.this);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog.setMessage("downloading");
-            progressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            try {
-                URL url = new URL("https://restcountries.eu/rest/v2/all?fields=name;translations;alpha2Code");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line).append("\n");
-                    }
-                    bufferedReader.close();
-                    return stringBuilder.toString();
-                } finally {
-                    urlConnection.disconnect();
-                }
-            } catch (Exception ex) {
-                Log.e(LOG, ex.getMessage());
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String response) {
-            if (response == null) {
-                progressDialog.dismiss();
-
-                return;
-            }
-            Log.i(LOG, response);
-            try {
-                JSONArray countries = (JSONArray) new JSONTokener(response).nextValue();
-                for (int i = 0; i < countries.length(); i++) {
-                    JSONObject country = countries.getJSONObject(i);
-                    String countryName = country.getString("name");
-                    String countryFarsiName = country.getJSONObject("translations")
-                            .getString("fa");
-                    String alpha2Code = country.getString("alpha2Code");
-                    countriesList.add(new Country(countryName, countryFarsiName, alpha2Code));
-                }
-
-            } catch (JSONException ex) {
-                ex.printStackTrace();
-            } finally {
-                progressDialog.dismiss();
-                countriesAdapter.notifyDataSetChanged();
-            }
         }
     }
 
@@ -205,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
                 return;
             }
-//            Log.i(LOG, response);
             Country country = new Country();
             try {
                 JSONObject countryJson = (JSONObject) new JSONTokener(response).nextValue();
