@@ -10,7 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerCountries;
 
-//    SearchView search;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         enableHttpResponseCache();
-
-//        search = findViewById(R.id.search_countries_list);
-//        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                countriesAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
 
         recyclerCountries = findViewById(R.id.recycler_countries);
 
@@ -84,6 +69,31 @@ public class MainActivity extends AppCompatActivity {
                         countriesAdapter.notifyDataSetChanged();
                     }
                 }).execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem search = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) search.getActionView();
+        searchView.setQueryHint("Search");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                countriesAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void showCountryDetailsAlert(Country country) {
