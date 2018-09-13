@@ -8,7 +8,7 @@ public class Country {
     private String name, farsiName, nativeName, alpha2Code, alpha3Code, capitalNativeName;
     private Long population, area;
 
-    Country(){
+    public Country(){
 
     }
 
