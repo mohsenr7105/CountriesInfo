@@ -8,15 +8,22 @@
     tools:showIn="@layout/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.SearchView
-        android:id="@+id/search_countries_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        app:defaultQueryHint="search..." />
+    <!--<android.support.v7.widget.SearchView-->
+        <!--android:id="@+id/search_countries_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--app:defaultQueryHint="search..." />-->
 
-    <ListView
-        android:id="@+id/list_countries"
+    <!--<ListView-->
+        <!--android:id="@+id/list_countries"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_countries"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

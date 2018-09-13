@@ -3,19 +3,20 @@ package ir.mohsenr7105.countriesinfo;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.mohsenr7105.countriesinfo.adapter.CountriesAdapter;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCounteiesTask;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCountryTask;
 
@@ -27,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     CountriesAdapter countriesAdapter;
 
-    ListView listCountries;
-    SearchView search;
+    RecyclerView recyclerCountries;
+
+//    SearchView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +43,26 @@ public class MainActivity extends AppCompatActivity {
 
         enableHttpResponseCache();
 
-        search = findViewById(R.id.search_countries_list);
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+//        search = findViewById(R.id.search_countries_list);
+//        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                countriesAdapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                countriesAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
+        recyclerCountries = findViewById(R.id.recycler_countries);
 
-        listCountries = findViewById(R.id.list_countries);
         countriesAdapter = new CountriesAdapter(this, countriesList);
-        listCountries.setAdapter(countriesAdapter);
-        listCountries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        countriesAdapter.setOnItemClickListener(new CountriesAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Country country = (Country) adapterView.getItemAtPosition(i);
+            public void onItemClick(Country country) {
                 new RetrieveCountryTask(MainActivity.this,
                         new RetrieveCountryTask.OnTaskCompleted() {
                             @Override
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                         }).execute(country.getAlpha2Code());
             }
         });
+
+        recyclerCountries.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerCountries.setAdapter(countriesAdapter);
 
         new RetrieveCounteiesTask(MainActivity.this,
                 new RetrieveCounteiesTask.OnTaskCompleted() {
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 }).execute();
     }
 
-    private void showCountryDetailsAlert(Country country){
+    private void showCountryDetailsAlert(Country country) {
         String info = getString(R.string.html_country_more_info,
                 country.getName(), country.getNativeName(), country.getFarsiName(),
                 country.getAlpha2Code(), country.getAlpha3Code(), country.getCapitalNativeName(),
