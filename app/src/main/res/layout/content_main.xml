@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main"
+    android:background="@color/colorBg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--<android.support.v7.widget.SearchView-->
-        <!--android:id="@+id/search_countries_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--app:defaultQueryHint="search..." />-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/list_countries"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_countries"
@@ -27,4 +17,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</RelativeLayout>
