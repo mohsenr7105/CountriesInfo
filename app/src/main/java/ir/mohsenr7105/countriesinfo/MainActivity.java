@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.mohsenr7105.countriesinfo.adapter.CountriesAdapter;
+import ir.mohsenr7105.countriesinfo.model.Country;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCounteiesTask;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCountryTask;
 

@@ -1,4 +1,4 @@
-package ir.mohsenr7105.countriesinfo;
+package ir.mohsenr7105.countriesinfo.model;
 
 import java.util.Locale;
 

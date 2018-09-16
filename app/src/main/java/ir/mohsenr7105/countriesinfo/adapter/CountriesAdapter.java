@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mohsenr7105.countriesinfo.Country;
+import ir.mohsenr7105.countriesinfo.model.Country;
 import ir.mohsenr7105.countriesinfo.R;
 
 public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>

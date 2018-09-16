@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import ir.mohsenr7105.countriesinfo.Country;
+import ir.mohsenr7105.countriesinfo.model.Country;
 
 public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
     private static final String LOG = RetrieveCountryTask.class.getSimpleName();

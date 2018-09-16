@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mohsenr7105.countriesinfo.Country;
+import ir.mohsenr7105.countriesinfo.model.Country;
 
 public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
     private static final String LOG = RetrieveCounteiesTask.class.getSimpleName();
