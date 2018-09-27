@@ -48,6 +48,11 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         int resId = mContext.getResources().getIdentifier(
                 resName , "drawable", mContext.getPackageName()
         );
+        if (resId == 0){
+            resId = mContext.getResources().getIdentifier(
+                    "ic_list_unknown", "drawable", mContext.getPackageName()
+            );
+        }
         holder.imageFlag.setImageResource(resId);
         holder.textName.setText(country.getName());
         holder.textFarsiName.setText(country.getFarsiName());
