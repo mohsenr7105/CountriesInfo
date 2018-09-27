@@ -14,6 +14,8 @@
         android:id="@+id/recycler_countries"
         android:clipToPadding="false"
         android:scrollbars="vertical"
+        android:paddingTop="@dimen/recycler_padding_top"
+        android:paddingBottom="@dimen/recycler_padding_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
