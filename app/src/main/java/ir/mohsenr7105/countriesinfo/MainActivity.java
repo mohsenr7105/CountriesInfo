@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.mohsenr7105.countriesinfo.adapter.CountriesAdapter;
+import ir.mohsenr7105.countriesinfo.fragment.BottomSheetDetailsFragment;
 import ir.mohsenr7105.countriesinfo.model.Country;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCounteiesTask;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCountryTask;
@@ -99,16 +100,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showCountryDetailsAlert(Country country) {
-        String info = getString(R.string.html_country_more_info,
-                country.getName(), country.getNativeName(), country.getFarsiName(),
-                country.getAlpha2Code(), country.getAlpha3Code(), country.getCapitalNativeName(),
-                country.getPopulation(), country.getArea());
-        Spanned htmlText = Html.fromHtml(info);
-        new AlertDialog.Builder(MainActivity.this)
-                .setTitle("more info")
-                .setMessage(htmlText)
-                .setNeutralButton("ok", null)
-                .show();
+        BottomSheetDetailsFragment bottomSheetDetailsFragment = new BottomSheetDetailsFragment();
+        String alpha2code = country.getAlpha2Code();
+        String countryNames = getString(R.string.html_country_names,
+                country.getName(), country.getNativeName(), country.getFarsiName());
+        String countryDetails = getString(R.string.html_country_details,
+                country.getAlpha2Code(), country.getAlpha3Code(),
+                country.getCapitalNativeName(), country.getCapitalNativeName(),
+                country.getPopulation(), country.getArea(),
+                country.getCallingCodes(), country.getRegion(),
+                country.getTimeZones(), country.getCurrencies(),
+                country.getLanguages());
+        Bundle data = new Bundle();
+        data.putString("alpha2Code", alpha2code);
+        data.putString("names", countryNames);
+        data.putString("details", countryDetails);
+        bottomSheetDetailsFragment.setArguments(data);
+        bottomSheetDetailsFragment.show(getSupportFragmentManager(), bottomSheetDetailsFragment.getTag());
     }
 
     private void enableHttpResponseCache() {

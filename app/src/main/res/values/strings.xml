@@ -11,4 +11,25 @@
         <b>Area: </b>%8$d<br>
         ]]>
     </string>
+    <string name="html_country_names">
+        <![CDATA[
+        <b>English Name: </b>%1$s<br>
+        <b>Native Name: </b>%2$s<br>
+        <b>Farsi Name: </b>%3$s<br>
+        ]]>
+    </string>
+    <string name="html_country_details">
+        <![CDATA[
+        <b>Alpha Codes: </b>%1$s, %2$s<br>
+        <b>Capital: </b>%3$s, %4$s<br>
+        <b>Population: </b>%5$d<br>
+        <b>Area: </b>%6$d<br>
+        <b>Calling codes: </b>%7$s<br>
+        <b>Region: </b>%8$s<br>
+        <b>Time Zone(s): </b>%9$s<br>
+        <b>Currencies: </b>%10$s<br>
+        <b>Languages: </b>%11$s<br>
+]]>
+    </string>
+
 </resources>

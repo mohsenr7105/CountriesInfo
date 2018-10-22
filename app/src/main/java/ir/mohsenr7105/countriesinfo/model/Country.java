@@ -5,7 +5,8 @@ import java.util.Locale;
 public class Country {
     private static final String LOG = Country.class.getSimpleName();
 
-    private String name, farsiName, nativeName, alpha2Code, alpha3Code, capitalNativeName;
+    private String name, farsiName, nativeName, alpha2Code, alpha3Code, capitalNativeName,
+        callingCodes, region, timeZones, currencies, languages;
     private Long population, area;
 
     public Country(){
@@ -50,6 +51,26 @@ public class Country {
         this.area = area;
     }
 
+    public void setCallingCodes(String callingCodes) {
+        this.callingCodes = callingCodes;
+    }
+
+    public void setCurrencies(String currencies) {
+        this.currencies = currencies;
+    }
+
+    public void setLanguages(String languages) {
+        this.languages = languages;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setTimeZones(String timeZones) {
+        this.timeZones = timeZones;
+    }
+
     public String getName() {
         return name;
     }
@@ -80,6 +101,26 @@ public class Country {
 
     public Long getArea() {
         return area;
+    }
+
+    public String getCallingCodes() {
+        return callingCodes;
+    }
+
+    public String getCurrencies() {
+        return currencies;
+    }
+
+    public String getLanguages() {
+        return languages;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getTimeZones() {
+        return timeZones;
     }
 
     @Override
