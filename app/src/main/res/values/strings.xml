@@ -2,21 +2,21 @@
     <string name="app_name">Countries Info</string>
     <string name="html_country_names">
         <![CDATA[
-        <b>English Name: </b>%1$s<br>
-        <b>Native Name: </b>%2$s<br>
+        <b>%1$s</b><br>
+        Native Name: <b>%2$s</b><br>
         ]]>
     </string>
     <string name="html_country_details">
         <![CDATA[
-        <b>Alpha Codes: </b>%1$s, %2$s<br>
-        <b>Capital: </b>%3$s<br>
-        <b>Population: </b>%4$d<br>
-        <b>Area: </b>%5$d<br>
-        <b>Calling codes: </b>%6$s<br>
-        <b>Region: </b>%7$s<br>
-        <b>Time Zone(s): </b>%8$s<br>
-        <b>Currencies: </b>%9$s<br>
-        <b>Languages: </b>%10$s<br>
+        Alpha Codes: <b>%1$s, %2$s</b><br>
+        Capital: <b>%3$s</b><br>
+        Population: <b>%4$d</b><br>
+        Area: <b>%5$d</b><br>
+        Calling codes: <b>%6$s</b><br>
+        Region: <b>%7$s</b><br>
+        Time Zone(s): <b>%8$s</b><br>
+        Currencies: <b>%9$s</b><br>
+        Languages: <b>%10$s</b><br>
 ]]>
     </string>
 
