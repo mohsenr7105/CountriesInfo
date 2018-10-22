@@ -14,13 +14,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/card_height"
         android:background="?attr/selectableItemBackground">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/text_country_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="@dimen/card_name_vertical_margin"
             android:layout_marginEnd="@dimen/card_name_horizontal_margin"
@@ -33,7 +33,8 @@
             android:text="@string/app_name"
             android:textColor="@color/colorPrimaryText"
             android:textDirection="ltr"
-            android:textSize="@dimen/card_name_text_size" />
+            app:autoSizePresetSizes="@array/card_name_auto_size_text_sizes"
+            app:autoSizeTextType="uniform" />
 
         <ImageView
             android:id="@+id/image_country_flag"

@@ -1,6 +1,7 @@
 package ir.mohsenr7105.countriesinfo.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -106,7 +107,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
 
     public class CountriesViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageFlag;
-        public TextView textName;
+        public AppCompatTextView textName;
 
         public CountriesViewHolder(View itemView) {
             super(itemView);

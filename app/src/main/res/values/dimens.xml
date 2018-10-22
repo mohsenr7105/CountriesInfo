@@ -8,7 +8,7 @@
     <dimen name="card_corner_radius">2dp</dimen>
     <dimen name="card_image_width">96dp</dimen>
     <dimen name="card_image_height">72dp</dimen>
-    <dimen name="card_name_text_size">18sp</dimen>
+    <dimen name="card_height">@dimen/card_image_height</dimen>
     <dimen name="card_name_vertical_margin">8dp</dimen>
     <dimen name="card_name_horizontal_margin">16dp</dimen>
     <dimen name="card_name_line_spacing_multiplier">1.3</dimen>
