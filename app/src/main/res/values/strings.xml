@@ -1,16 +1,5 @@
 <resources>
     <string name="app_name">Countries Info</string>
-    <string name="html_country_more_info">
-        <![CDATA[
-        <b>Name: </b>%1$s<br>
-        <b>Native name: </b>%2$s<br>
-        <b>Farsi name: </b>%3$s<br>
-        <b>Codes: </b>%4$s, %5$s<br>
-        <b>Capital: </b>%6$s<br>
-        <b>Population: </b>%7$d<br>
-        <b>Area: </b>%8$d<br>
-        ]]>
-    </string>
     <string name="html_country_names">
         <![CDATA[
         <b>English Name: </b>%1$s<br>
@@ -20,14 +9,14 @@
     <string name="html_country_details">
         <![CDATA[
         <b>Alpha Codes: </b>%1$s, %2$s<br>
-        <b>Capital: </b>%3$s, %4$s<br>
-        <b>Population: </b>%5$d<br>
-        <b>Area: </b>%6$d<br>
-        <b>Calling codes: </b>%7$s<br>
-        <b>Region: </b>%8$s<br>
-        <b>Time Zone(s): </b>%9$s<br>
-        <b>Currencies: </b>%10$s<br>
-        <b>Languages: </b>%11$s<br>
+        <b>Capital: </b>%3$s<br>
+        <b>Population: </b>%4$d<br>
+        <b>Area: </b>%5$d<br>
+        <b>Calling codes: </b>%6$s<br>
+        <b>Region: </b>%7$s<br>
+        <b>Time Zone(s): </b>%8$s<br>
+        <b>Currencies: </b>%9$s<br>
+        <b>Languages: </b>%10$s<br>
 ]]>
     </string>
 

@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 country.getName(), country.getNativeName());
         String countryDetails = getString(R.string.html_country_details,
                 country.getAlpha2Code(), country.getAlpha3Code(),
-                country.getCapitalNativeName(), country.getCapitalNativeName(),
+                country.getCapitalNativeName(),
                 country.getPopulation(), country.getArea(),
                 country.getCallingCodes(), country.getRegion(),
                 country.getTimeZones(), country.getCurrencies(),
