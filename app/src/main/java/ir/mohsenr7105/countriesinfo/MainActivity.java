@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         BottomSheetDetailsFragment bottomSheetDetailsFragment = new BottomSheetDetailsFragment();
         String alpha2code = country.getAlpha2Code();
         String countryNames = getString(R.string.html_country_names,
-                country.getName(), country.getNativeName(), country.getFarsiName());
+                country.getName(), country.getNativeName());
         String countryDetails = getString(R.string.html_country_details,
                 country.getAlpha2Code(), country.getAlpha3Code(),
                 country.getCapitalNativeName(), country.getCapitalNativeName(),

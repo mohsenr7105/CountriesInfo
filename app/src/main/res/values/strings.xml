@@ -15,7 +15,6 @@
         <![CDATA[
         <b>English Name: </b>%1$s<br>
         <b>Native Name: </b>%2$s<br>
-        <b>Farsi Name: </b>%3$s<br>
         ]]>
     </string>
     <string name="html_country_details">

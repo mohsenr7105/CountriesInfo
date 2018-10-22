@@ -55,7 +55,6 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         }
         holder.imageFlag.setImageResource(resId);
         holder.textName.setText(country.getName());
-        holder.textFarsiName.setText(country.getFarsiName());
         holder.bindListener(country, mListener);
     }
 
@@ -79,7 +78,6 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
 
                     for (Country country : (ArrayList<Country>) mCountriesFixedList) {
                         if (country.getName().toLowerCase().contains(charSequence)
-                                || country.getFarsiName().contains(charSequence)
                                 || country.getAlpha2Code().toLowerCase().contains(charSequence)) {
                             filteredCountries.add(country);
                         }
@@ -108,13 +106,12 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
 
     public class CountriesViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageFlag;
-        public TextView textName, textFarsiName;
+        public TextView textName;
 
         public CountriesViewHolder(View itemView) {
             super(itemView);
             imageFlag = itemView.findViewById(R.id.image_country_flag);
             textName = itemView.findViewById(R.id.text_country_name);
-            textFarsiName = itemView.findViewById(R.id.text_country_farsi_name);
         }
 
         public void bindListener(final Country country, final OnItemClickListener listener){

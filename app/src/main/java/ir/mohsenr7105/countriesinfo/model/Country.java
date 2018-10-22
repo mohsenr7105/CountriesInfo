@@ -5,7 +5,7 @@ import java.util.Locale;
 public class Country {
     private static final String LOG = Country.class.getSimpleName();
 
-    private String name, farsiName, nativeName, alpha2Code, alpha3Code, capitalNativeName,
+    private String name, nativeName, alpha2Code, alpha3Code, capitalNativeName,
         callingCodes, region, timeZones, currencies, languages;
     private Long population, area;
 
@@ -13,18 +13,13 @@ public class Country {
 
     }
 
-    public Country(String name, String farsiName, String alpha2Code){
+    public Country(String name, String alpha2Code){
         this.name = name;
-        this.farsiName = farsiName;
         this.alpha2Code = alpha2Code;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setFarsiName(String farsiName) {
-        this.farsiName = farsiName;
     }
 
     public void setAlpha2Code(String alpha2Code) {
@@ -75,10 +70,6 @@ public class Country {
         return name;
     }
 
-    public String getFarsiName() {
-        return farsiName;
-    }
-
     public String getAlpha2Code() {
         return alpha2Code;
     }
@@ -125,8 +116,8 @@ public class Country {
 
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(),"%1$s %2$s %3$s %4$s %5$s %6$s %7$d %8$d",
-                getName(), getNativeName(), getFarsiName(), getAlpha2Code(), getAlpha3Code(),
+        return String.format(Locale.getDefault(),"%1$s %2$s %3$s %4$s %5$s %6$d %7$d",
+                getName(), getNativeName(), getAlpha2Code(), getAlpha3Code(),
                 getCapitalNativeName(), getPopulation(), getArea());
     }
 }

@@ -81,7 +81,7 @@ public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
                 String countryFarsiName = country.getJSONObject("translations")
                         .getString("fa");
                 String alpha2Code = country.getString("alpha2Code");
-                countriesList.add(new Country(countryName, countryFarsiName, alpha2Code));
+                countriesList.add(new Country(countryName, alpha2Code));
             }
 
         } catch (JSONException ex) {
@@ -89,7 +89,6 @@ public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
         } finally {
             mProgressDialog.dismiss();
             mListener.onTaskCompleted(countriesList);
-//            countriesAdapter.notifyDataSetChanged();
         }
     }
 

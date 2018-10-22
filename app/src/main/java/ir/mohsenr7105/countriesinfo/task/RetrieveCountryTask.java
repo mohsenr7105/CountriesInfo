@@ -77,7 +77,6 @@ public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
             JSONObject countryJson = (JSONObject) new JSONTokener(response).nextValue();
             country.setName(countryJson.getString("name"));
             country.setNativeName(countryJson.getString("nativeName"));
-            country.setFarsiName(countryJson.getJSONObject("translations").getString("fa"));
             country.setAlpha2Code(countryJson.getString("alpha2Code"));
             country.setAlpha3Code(countryJson.getString("alpha3Code"));
             country.setCapitalNativeName(countryJson.getString("capital"));
