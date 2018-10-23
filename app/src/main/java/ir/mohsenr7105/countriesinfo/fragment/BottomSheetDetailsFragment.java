@@ -4,6 +4,7 @@ package ir.mohsenr7105.countriesinfo.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ir.mohsenr7105.countriesinfo.R;
 import ir.mohsenr7105.countriesinfo.model.Country;
@@ -64,27 +70,7 @@ public class BottomSheetDetailsFragment extends BottomSheetDialogFragment {
                     @Override
                     public void onTaskSucceed(Country country) {
                         boxMessage.setVisibility(View.GONE);
-                        String countryNames = getString(R.string.html_country_names,
-                                country.getName(), country.getNativeName());
-                        String countryDetails = getString(R.string.html_country_details,
-                                country.getAlpha2Code(), country.getAlpha3Code(),
-                                country.getCapitalNativeName(),
-                                country.getPopulation(), country.getArea(),
-                                country.getCallingCodes(), country.getRegion(),
-                                country.getTimeZones(), country.getCurrencies(),
-                                country.getLanguages());
-                        htmlTextNames.setHtmlText(countryNames);
-                        htmlTextDetails.setHtmlText(countryDetails);
-                        String resName = "ic_list_" + getArguments().getString("alpha2Code").toLowerCase();
-                        int resId = getResources().getIdentifier(
-                                resName, "drawable", getContext().getPackageName()
-                        );
-                        if (resId == 0) {
-                            resId = getResources().getIdentifier(
-                                    "ic_list_unknown", "drawable", getContext().getPackageName()
-                            );
-                        }
-                        imageFlag.setImageResource(resId);
+                        setDetails(country);
                         boxResult.setVisibility(View.VISIBLE);
                     }
 
@@ -95,5 +81,55 @@ public class BottomSheetDetailsFragment extends BottomSheetDialogFragment {
                     }
                 }
         ).execute(getArguments().getString("alpha2Code"));
+    }
+
+    private void setDetails(Country country){
+        // country names
+        List<String> countryNames = new ArrayList<>();
+        countryNames.add(getString(R.string.html_country_name, country.getName()));
+        if (!country.getName().equals(country.getNativeName())){
+            countryNames.add(getString(R.string.html_country_native_name, country.getNativeName()));
+        }
+        String countryNamesString = TextUtils.join("<br>", countryNames);
+        // country details
+        List<String> countryDetails = new ArrayList<>();
+        countryDetails.add(getString(R.string.html_country_alpha_codes, country.getAlpha2Code(), country.getAlpha3Code()));
+        if (!TextUtils.isEmpty(country.getCapitalNativeName())){
+            countryDetails.add(getString(R.string.html_country_capital, country.getCapitalNativeName()));
+        }
+        if (country.getPopulation() > 0){
+            countryDetails.add(getString(R.string.html_country_population, country.getPopulation().toString()));
+        }
+        if (country.getArea() > 0){
+            countryDetails.add(getString(R.string.html_country_area, country.getArea().toString()));
+        }
+        if (!TextUtils.isEmpty(country.getCallingCodes())){
+            countryDetails.add(getString(R.string.html_country_calling_codes, country.getCallingCodes()));
+        }
+        if (!TextUtils.isEmpty(country.getRegion())){
+            countryDetails.add(getString(R.string.html_country_region, country.getRegion()));
+        }
+        if (!TextUtils.isEmpty(country.getTimeZones())){
+            countryDetails.add(getString(R.string.html_country_timezones, country.getTimeZones()));
+        }
+        if (!TextUtils.isEmpty(country.getCurrencies())){
+            countryDetails.add(getString(R.string.html_country_currencies, country.getCurrencies()));
+        }
+        if (!TextUtils.isEmpty(country.getLanguages())){
+            countryDetails.add(getString(R.string.html_country_languages, country.getLanguages()));
+        }
+        String countryDetailsString = TextUtils.join("<br>", countryDetails);
+        htmlTextNames.setHtmlText(countryNamesString);
+        htmlTextDetails.setHtmlText(countryDetailsString);
+        String resName = "ic_list_" + getArguments().getString("alpha2Code").toLowerCase();
+        int resId = getResources().getIdentifier(
+                resName, "drawable", getContext().getPackageName()
+        );
+        if (resId == 0) {
+            resId = getResources().getIdentifier(
+                    "ic_list_unknown", "drawable", getContext().getPackageName()
+            );
+        }
+        imageFlag.setImageResource(resId);
     }
 }

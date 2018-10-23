@@ -80,7 +80,14 @@ public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
             // get languages
             country.setLanguages(getLanguages(countryJson.getJSONArray("languages")));
             // get region and subregion then join it
-            country.setRegion(countryJson.getString("region") + " , " + countryJson.getString("subregion"));
+            String region = "";
+            if (!TextUtils.isEmpty( countryJson.getString("region"))){
+                region = countryJson.getString("region");
+                if (!TextUtils.isEmpty(countryJson.getString("subregion"))){
+                    region += ", " + countryJson.getString("subregion");
+                }
+            }
+            country.setRegion(region);
             // get time zones array and join
             country.setTimeZones(TextUtils.join(", ", jsonToList(countryJson.getJSONArray("timezones"))));
         } catch (JSONException ex) {

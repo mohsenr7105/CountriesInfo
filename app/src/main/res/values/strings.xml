@@ -1,24 +1,16 @@
 <resources>
     <string name="app_name">Countries Info</string>
-    <string name="html_country_names">
-        <![CDATA[
-        <b>%1$s</b><br>
-        Native Name: <b>%2$s</b><br>
-        ]]>
-    </string>
-    <string name="html_country_details">
-        <![CDATA[
-        Alpha Codes: <b>%1$s, %2$s</b><br>
-        Capital: <b>%3$s</b><br>
-        Population: <b>%4$d</b><br>
-        Area: <b>%5$d</b><br>
-        Calling codes: <b>%6$s</b><br>
-        Region: <b>%7$s</b><br>
-        Time Zone(s): <b>%8$s</b><br>
-        Currencies: <b>%9$s</b><br>
-        Languages: <b>%10$s</b><br>
-]]>
-    </string>
+    <string name="html_country_name"><![CDATA[<b>%1$s</b>]]></string>
+    <string name="html_country_native_name"><![CDATA[Native name: <b>%1$s</b>]]></string>
+    <string name="html_country_alpha_codes"><![CDATA[Alpha codes: <b>%1$s, %2$s</b>]]></string>
+    <string name="html_country_capital"><![CDATA[Capital: <b>%1$s</b>]]></string>
+    <string name="html_country_population"><![CDATA[Population: <b>%1$s</b>]]></string>
+    <string name="html_country_area"><![CDATA[Area: <b>%1$s km<sup>2</sup></b>]]></string>
+    <string name="html_country_calling_codes"><![CDATA[Calling code(s): <b>%1$s</b>]]></string>
+    <string name="html_country_region"><![CDATA[Region: <b>%1$s</b>]]></string>
+    <string name="html_country_timezones"><![CDATA[Timezone(s): <b>%1$s</b>]]></string>
+    <string name="html_country_currencies"><![CDATA[Currency(es): <b>%1$s</b>]]></string>
+    <string name="html_country_languages"><![CDATA[Language(s): <b>%1$s</b>]]></string>
     <string name="html_message_no_internet">
         <![CDATA[
         <b>No Internet!</b><br>
