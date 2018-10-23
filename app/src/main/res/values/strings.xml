@@ -19,5 +19,16 @@
         Languages: <b>%10$s</b><br>
 ]]>
     </string>
-
+    <string name="message_caching_alert">
+        We downloads countries information from the web\n
+        and caches them for 1 day.
+    </string>
+    <string name="message_loading_countries">
+        Loading Countries&#8230;
+    </string>
+    <string name="html_test">
+        <![CDATA[
+        <b>html</b>
+]]>
+    </string>
 </resources>

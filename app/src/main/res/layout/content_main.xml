@@ -10,13 +10,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_countries"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        android:paddingTop="@dimen/recycler_padding_top"
-        android:paddingBottom="@dimen/recycler_padding_bottom"
+    <ir.mohsenr7105.countriesinfo.view.HtmlParsableTextView
+        android:id="@+id/text_loading_message"
+        app:htmlText="@string/html_test"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_cache_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:text="@string/message_caching_alert" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_countries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/recycler_padding_bottom"
+            android:paddingTop="@dimen/recycler_padding_top"
+            android:scrollbars="vertical" />
 
 </RelativeLayout>
