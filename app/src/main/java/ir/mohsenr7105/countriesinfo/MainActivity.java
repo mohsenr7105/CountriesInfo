@@ -81,6 +81,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void showSearchResultAlert(boolean show, CharSequence searchedText){
+        if (show) {
+            textCacheMessage.setVisibility(View.GONE);
+            htmlTextMainMessage.setHtmlText(getString(R.string.html_message_no_result, searchedText));
+            boxMessages.setVisibility(View.VISIBLE);
+            return;
+        }
+        if (!show){
+            boxMessages.setVisibility(View.GONE);
+        }
+    }
+
     private void bindViews(){
         recyclerCountries = findViewById(R.id.recycler_countries);
         swipeRefresh = findViewById(R.id.swipe_refresh);

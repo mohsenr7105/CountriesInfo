@@ -14,11 +14,12 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.mohsenr7105.countriesinfo.MainActivity;
 import ir.mohsenr7105.countriesinfo.R;
 import ir.mohsenr7105.countriesinfo.model.Country;
 
 public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>
-    implements Filterable{
+        implements Filterable {
     private static final String LOG = CountriesAdapter.class.getSimpleName();
 
     private Context mContext;
@@ -27,7 +28,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
     private List mCountriesList;
     private List mCountriesFixedList;
 
-    public CountriesAdapter(Context context, List<Country> countries){
+    public CountriesAdapter(Context context, List<Country> countries) {
         mContext = context;
         mCountriesList = countries;
         mCountriesFixedList = countries;
@@ -46,9 +47,9 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         String resName = "ic_list_" + country.getAlpha2Code().toLowerCase();
         Log.i(LOG, resName);
         int resId = mContext.getResources().getIdentifier(
-                resName , "drawable", mContext.getPackageName()
+                resName, "drawable", mContext.getPackageName()
         );
-        if (resId == 0){
+        if (resId == 0) {
             resId = mContext.getResources().getIdentifier(
                     "ic_list_unknown", "drawable", mContext.getPackageName()
             );
@@ -94,13 +95,15 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 mCountriesList = (ArrayList<Country>) filterResults.values;
+                ((MainActivity) CountriesAdapter.this.mContext).showSearchResultAlert(filterResults.count == 0, charSequence);
                 notifyDataSetChanged();
             }
+
         };
         return filter;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -114,7 +117,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
             textName = itemView.findViewById(R.id.text_country_name);
         }
 
-        public void bindListener(final Country country, final OnItemClickListener listener){
+        public void bindListener(final Country country, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

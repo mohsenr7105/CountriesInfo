@@ -35,12 +35,12 @@
     </string>
     <string name="html_message_loading_country">
         <![CDATA[
-        <b>Loading Country "%1$s" Details&hellip;</b>
+        <b>Loading &ldquo;%1$s&rdquo; Details&hellip;</b>
 ]]>
     </string>
     <string name="html_message_no_result">
         <![CDATA[
-        <b>No Result for "%1$s"</b>
+        <b>No Result for &ldquo;%1$s&rdquo;</b>
 ]]>
     </string>
     <string name="html_message_loading_country_failed">
