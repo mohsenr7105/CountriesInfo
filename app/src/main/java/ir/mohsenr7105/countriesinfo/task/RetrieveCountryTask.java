@@ -1,7 +1,5 @@
 package ir.mohsenr7105.countriesinfo.task;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,21 +21,15 @@ import ir.mohsenr7105.countriesinfo.model.Country;
 public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
     private static final String LOG = RetrieveCountryTask.class.getSimpleName();
 
-    private Context mContext;
-    private OnTaskCompleted mListener;
-    private ProgressDialog mProgressDialog;
+    private OnTaskListener mListener;
 
-    public RetrieveCountryTask(Context context, OnTaskCompleted listener) {
-        mContext = context;
+    public RetrieveCountryTask(OnTaskListener listener) {
         mListener = listener;
     }
 
     @Override
     protected void onPreExecute() {
-        mProgressDialog = new ProgressDialog(mContext);
-        mProgressDialog.setMessage("downloading country details");
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
+        mListener.onTaskStarted();
     }
 
     @Override
@@ -68,7 +59,7 @@ public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String response) {
         if (response == null) {
-            mProgressDialog.dismiss();
+            mListener.onTaskFailed();
 
             return;
         }
@@ -95,8 +86,7 @@ public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
         } catch (JSONException ex) {
             ex.printStackTrace();
         } finally {
-            mProgressDialog.dismiss();
-            mListener.onTaskCompleted(country);
+            mListener.onTaskSucceed(country);
         }
     }
 
@@ -151,7 +141,9 @@ public class RetrieveCountryTask extends AsyncTask<String, Void, String> {
         return list;
     }
 
-    public interface OnTaskCompleted {
-        void onTaskCompleted(Country country);
+    public interface OnTaskListener {
+        void onTaskStarted();
+        void onTaskSucceed(Country country);
+        void onTaskFailed();
     }
 }

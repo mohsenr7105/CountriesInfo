@@ -1,17 +1,13 @@
 package ir.mohsenr7105.countriesinfo;
 
-import android.app.AlertDialog;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +22,6 @@ import ir.mohsenr7105.countriesinfo.adapter.CountriesAdapter;
 import ir.mohsenr7105.countriesinfo.fragment.BottomSheetDetailsFragment;
 import ir.mohsenr7105.countriesinfo.model.Country;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCountriesTask;
-import ir.mohsenr7105.countriesinfo.task.RetrieveCountryTask;
 import ir.mohsenr7105.countriesinfo.view.HtmlParsableTextView;
 
 
@@ -99,13 +94,7 @@ public class MainActivity extends AppCompatActivity {
         countriesAdapter.setOnItemClickListener(new CountriesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Country country) {
-                new RetrieveCountryTask(MainActivity.this,
-                        new RetrieveCountryTask.OnTaskCompleted() {
-                            @Override
-                            public void onTaskCompleted(Country country) {
-                                showCountryDetailsAlert(country);
-                            }
-                        }).execute(country.getAlpha2Code());
+                showCountryDetailsAlert(country);
             }
         });
 
@@ -155,20 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void showCountryDetailsAlert(Country country) {
         BottomSheetDetailsFragment bottomSheetDetailsFragment = new BottomSheetDetailsFragment();
-        String alpha2code = country.getAlpha2Code();
-        String countryNames = getString(R.string.html_country_names,
-                country.getName(), country.getNativeName());
-        String countryDetails = getString(R.string.html_country_details,
-                country.getAlpha2Code(), country.getAlpha3Code(),
-                country.getCapitalNativeName(),
-                country.getPopulation(), country.getArea(),
-                country.getCallingCodes(), country.getRegion(),
-                country.getTimeZones(), country.getCurrencies(),
-                country.getLanguages());
         Bundle data = new Bundle();
-        data.putString("alpha2Code", alpha2code);
-        data.putString("names", countryNames);
-        data.putString("details", countryDetails);
+        data.putString("alpha2Code", country.getAlpha2Code());
+        data.putString("name", country.getName());
         bottomSheetDetailsFragment.setArguments(data);
         bottomSheetDetailsFragment.show(getSupportFragmentManager(), bottomSheetDetailsFragment.getTag());
     }

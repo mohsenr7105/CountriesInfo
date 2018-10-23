@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mohsenr7105.countriesinfo.model.Country;
 import ir.mohsenr7105.countriesinfo.R;
+import ir.mohsenr7105.countriesinfo.model.Country;
 
 public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>
     implements Filterable{

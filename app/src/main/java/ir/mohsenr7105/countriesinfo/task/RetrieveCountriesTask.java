@@ -1,6 +1,5 @@
 package ir.mohsenr7105.countriesinfo.task;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 

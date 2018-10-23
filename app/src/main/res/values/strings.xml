@@ -21,7 +21,7 @@
     </string>
     <string name="html_message_no_internet">
         <![CDATA[
-        <b>No Internet Connection!</b><br>
+        <b>No Internet!</b><br>
         Swipe down when internet connected for loading countries information.
 ]]>
     </string>
@@ -35,12 +35,17 @@
     </string>
     <string name="html_message_loading_country">
         <![CDATA[
-        <b>Loading Country "%1$s"</b>
+        <b>Loading Country "%1$s" Details&hellip;</b>
 ]]>
     </string>
     <string name="html_message_no_result">
         <![CDATA[
         <b>No Result for "%1$s"</b>
+]]>
+    </string>
+    <string name="html_message_loading_country_failed">
+        <![CDATA[
+        <b>No Internet!</b>
 ]]>
     </string>
 </resources>
