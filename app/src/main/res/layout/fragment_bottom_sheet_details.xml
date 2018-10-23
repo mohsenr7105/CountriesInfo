@@ -7,7 +7,7 @@
     android:padding="@dimen/sheet_padding"
     tools:context=".fragment.BottomSheetDetailsFragment">
 
-    <TextView
+    <ir.mohsenr7105.countriesinfo.view.HtmlParsableTextView
         android:id="@+id/text_country_names"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/image_country_flag"
         android:lineSpacingMultiplier="@dimen/sheet_line_spacing_multiplier"
-        android:text="country names" />
+        />
 
     <ImageView
         android:id="@id/image_country_flag"
@@ -27,12 +27,12 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_list_unknown" />
 
-    <TextView
+    <ir.mohsenr7105.countriesinfo.view.HtmlParsableTextView
         android:id="@+id/text_country_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_country_names"
         android:lineSpacingMultiplier="@dimen/sheet_line_spacing_multiplier"
-        android:text="country details" />
+        />
 
 </RelativeLayout>

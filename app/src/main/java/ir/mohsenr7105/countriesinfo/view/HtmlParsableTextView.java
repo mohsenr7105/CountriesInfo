@@ -26,8 +26,10 @@ public class HtmlParsableTextView extends AppCompatTextView {
 
     private void style(Context context, AttributeSet attrs){
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HtmlParsableTextView);
-        setHtmlText(typedArray.getString(R.styleable.HtmlParsableTextView_htmlText));
-        typedArray.recycle();
+        if (typedArray.hasValue(R.styleable.HtmlParsableTextView_htmlText)){
+            setHtmlText(typedArray.getString(R.styleable.HtmlParsableTextView_htmlText));
+            typedArray.recycle();
+        }
     }
 
     public void setHtmlText(String htmlText){
