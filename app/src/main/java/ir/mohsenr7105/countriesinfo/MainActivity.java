@@ -1,8 +1,10 @@
 package ir.mohsenr7105.countriesinfo;
 
 import android.app.AlertDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,8 @@ import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,8 +25,9 @@ import java.util.List;
 import ir.mohsenr7105.countriesinfo.adapter.CountriesAdapter;
 import ir.mohsenr7105.countriesinfo.fragment.BottomSheetDetailsFragment;
 import ir.mohsenr7105.countriesinfo.model.Country;
-import ir.mohsenr7105.countriesinfo.task.RetrieveCounteiesTask;
+import ir.mohsenr7105.countriesinfo.task.RetrieveCountriesTask;
 import ir.mohsenr7105.countriesinfo.task.RetrieveCountryTask;
+import ir.mohsenr7105.countriesinfo.view.HtmlParsableTextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
     CountriesAdapter countriesAdapter;
 
     RecyclerView recyclerCountries;
+    SwipeRefreshLayout swipeRefresh;
+    LinearLayout boxMessages;
+    HtmlParsableTextView htmlTextMainMessage;
+    AppCompatTextView textCacheMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
         enableHttpResponseCache();
 
-        recyclerCountries = findViewById(R.id.recycler_countries);
+        bindViews();
 
-        countriesAdapter = new CountriesAdapter(this, countriesList);
-        countriesAdapter.setOnItemClickListener(new CountriesAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Country country) {
-                new RetrieveCountryTask(MainActivity.this,
-                        new RetrieveCountryTask.OnTaskCompleted() {
-                            @Override
-                            public void onTaskCompleted(Country country) {
-                                showCountryDetailsAlert(country);
-                            }
-                        }).execute(country.getAlpha2Code());
-            }
-        });
+        initCountriesRecyclerView();
 
-        recyclerCountries.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerCountries.setAdapter(countriesAdapter);
-
-        new RetrieveCounteiesTask(MainActivity.this,
-                new RetrieveCounteiesTask.OnTaskCompleted() {
-                    @Override
-                    public void onTaskCompleted(List<Country> countries) {
-                        countriesList.addAll(countries);
-                        countriesAdapter.notifyDataSetChanged();
-                    }
-                }).execute();
+        initSwipeRefresh();
     }
 
     @Override
@@ -97,6 +84,73 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void bindViews(){
+        recyclerCountries = findViewById(R.id.recycler_countries);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        boxMessages = findViewById(R.id.box_messages);
+        htmlTextMainMessage = findViewById(R.id.text_message_main);
+        textCacheMessage = findViewById(R.id.text_message_cache);
+    }
+
+    private void initCountriesRecyclerView(){
+        countriesAdapter = new CountriesAdapter(this, countriesList);
+        countriesAdapter.setOnItemClickListener(new CountriesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Country country) {
+                new RetrieveCountryTask(MainActivity.this,
+                        new RetrieveCountryTask.OnTaskCompleted() {
+                            @Override
+                            public void onTaskCompleted(Country country) {
+                                showCountryDetailsAlert(country);
+                            }
+                        }).execute(country.getAlpha2Code());
+            }
+        });
+
+        recyclerCountries.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerCountries.setAdapter(countriesAdapter);
+    }
+
+    private void initSwipeRefresh(){
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadCountries();
+            }
+        });
+        swipeRefresh.setRefreshing(true);
+        loadCountries();
+    }
+
+    private void loadCountries(){
+        new RetrieveCountriesTask(
+                new RetrieveCountriesTask.OnTaskListener() {
+                    @Override
+                    public void onTaskStarted() {
+                        boxMessages.setVisibility(View.VISIBLE);
+                        htmlTextMainMessage.setHtmlText(getString(R.string.html_message_loading_countries));
+                        textCacheMessage.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onTaskSucceed(List<Country> countries) {
+                        textCacheMessage.setVisibility(View.GONE);
+                        boxMessages.setVisibility(View.GONE);
+                        swipeRefresh.setRefreshing(false);
+                        swipeRefresh.setEnabled(false);
+                        countriesList.addAll(countries);
+                        countriesAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onTaskFailed() {
+                        htmlTextMainMessage.setHtmlText(getString(R.string.html_message_no_internet));
+                        swipeRefresh.setRefreshing(false);
+                    }
+
+                }).execute();
     }
 
     private void showCountryDetailsAlert(Country country) {

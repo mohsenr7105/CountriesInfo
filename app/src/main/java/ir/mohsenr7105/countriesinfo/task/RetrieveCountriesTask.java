@@ -1,6 +1,5 @@
 package ir.mohsenr7105.countriesinfo.task;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,24 +18,18 @@ import java.util.List;
 
 import ir.mohsenr7105.countriesinfo.model.Country;
 
-public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
-    private static final String LOG = RetrieveCounteiesTask.class.getSimpleName();
+public class RetrieveCountriesTask extends AsyncTask<Void, Void, String> {
+    private static final String LOG = RetrieveCountriesTask.class.getSimpleName();
 
-    private Context mContext;
-    private OnTaskCompleted mListener;
-    private ProgressDialog mProgressDialog;
+    private OnTaskListener mListener;
 
-    public RetrieveCounteiesTask(Context context, OnTaskCompleted listener){
-        mContext = context;
+    public RetrieveCountriesTask(OnTaskListener listener){
         mListener = listener;
     }
 
     @Override
     protected void onPreExecute() {
-        mProgressDialog = new ProgressDialog(mContext);
-        mProgressDialog.setMessage("downloading");
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
+        mListener.onTaskStarted();
     }
 
     @Override
@@ -66,8 +59,7 @@ public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String response) {
         if (response == null) {
-            mProgressDialog.dismiss();
-
+            mListener.onTaskFailed();
             return;
         }
         List<Country> countriesList = new ArrayList<>();
@@ -78,8 +70,6 @@ public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
             for (int i = 0; i < countries.length(); i++) {
                 JSONObject country = countries.getJSONObject(i);
                 String countryName = country.getString("name");
-                String countryFarsiName = country.getJSONObject("translations")
-                        .getString("fa");
                 String alpha2Code = country.getString("alpha2Code");
                 countriesList.add(new Country(countryName, alpha2Code));
             }
@@ -87,12 +77,13 @@ public class RetrieveCounteiesTask extends AsyncTask<Void, Void, String> {
         } catch (JSONException ex) {
             ex.printStackTrace();
         } finally {
-            mProgressDialog.dismiss();
-            mListener.onTaskCompleted(countriesList);
+            mListener.onTaskSucceed(countriesList);
         }
     }
 
-    public interface OnTaskCompleted{
-        void onTaskCompleted(List<Country> countriesList);
+    public interface OnTaskListener{
+        void onTaskStarted();
+        void onTaskSucceed(List<Country> countriesList);
+        void onTaskFailed();
     }
 }

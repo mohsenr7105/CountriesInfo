@@ -19,4 +19,28 @@
         Languages: <b>%10$s</b><br>
 ]]>
     </string>
+    <string name="html_message_no_internet">
+        <![CDATA[
+        <b>No Internet Connection!</b><br>
+        Swipe down when internet connected for loading countries information.
+]]>
+    </string>
+    <string name="html_message_loading_countries">
+        <![CDATA[
+        <b>Loading Countries&hellip;</b>
+]]>
+    </string>
+    <string name="message_cache_alert">
+        We caches downloaded information for 1 day.
+    </string>
+    <string name="html_message_loading_country">
+        <![CDATA[
+        <b>Loading Country "%1$s"</b>
+]]>
+    </string>
+    <string name="html_message_no_result">
+        <![CDATA[
+        <b>No Result for "%1$s"</b>
+]]>
+    </string>
 </resources>

@@ -10,13 +10,43 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_countries"
+    <LinearLayout
+        android:id="@+id/box_messages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/recycler_padding_bottom"
-        android:paddingTop="@dimen/recycler_padding_top"
-        android:scrollbars="vertical" />
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ir.mohsenr7105.countriesinfo.view.HtmlParsableTextView
+            android:id="@+id/text_message_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text_message_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:text="@string/message_cache_alert" />
+    </LinearLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_countries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/recycler_padding_bottom"
+            android:paddingTop="@dimen/recycler_padding_top"
+            android:scrollbars="vertical" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
