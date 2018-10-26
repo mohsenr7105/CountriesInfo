@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 loadCountries();
             }
         });
+        swipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color.colorAccent);
         swipeRefresh.setRefreshing(true);
         loadCountries();
     }

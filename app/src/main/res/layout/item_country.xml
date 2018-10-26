@@ -27,14 +27,12 @@
             android:layout_marginStart="@dimen/card_name_horizontal_margin"
             android:layout_marginTop="@dimen/card_name_vertical_margin"
             android:layout_toStartOf="@id/image_country_flag"
-            android:ellipsize="end"
-            android:lineSpacingMultiplier="@dimen/card_name_line_spacing_multiplier"
-            android:maxLines="2"
             android:text="@string/app_name"
-            android:textColor="@color/colorPrimaryText"
-            android:textDirection="ltr"
             app:autoSizePresetSizes="@array/card_name_auto_size_text_sizes"
-            app:autoSizeTextType="uniform" />
+            app:autoSizeTextType="uniform"
+            android:textAppearance="@style/TextCardTitle"
+            android:lineSpacingMultiplier="@dimen/card_name_line_spacing_multiplier"
+            />
 
         <ImageView
             android:id="@+id/image_country_flag"

@@ -3,4 +3,7 @@
     <declare-styleable name="HtmlParsableTextView">
         <attr name="htmlText" format="string"/>
     </declare-styleable>
+    <declare-styleable name="ProgressCircle">
+        <attr name="circularProgressTheme" format="reference"/>
+    </declare-styleable>
 </resources>

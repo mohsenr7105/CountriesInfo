@@ -9,4 +9,12 @@
         <item>17sp</item>
         <item>18sp</item>
     </array>
+    <array name="alert_auto_size_text_sizes">
+        <item>15sp</item>
+        <item>16sp</item>
+    </array>
+    <array name="details_auto_size_text_sizes">
+        <item>15sp</item>
+        <item>16sp</item>
+    </array>
 </resources>
